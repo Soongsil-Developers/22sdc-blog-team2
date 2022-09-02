@@ -1,0 +1,50 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const Header = () => {
+  return (
+    <div>
+      <nav class="navbar navbar-light">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">
+            {' '}
+            {헤더이름}
+            conduit
+          </a>
+          <ul class="nav navbar-nav pull-xs-right">
+            {' '}
+            {네비게이션바5개}
+            <li class="nav-item">
+              {/* <!-- Add "active" class when you're on that page" --> */}
+              <a class="nav-link active" href="">
+                Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <i class="ion-compose"></i>&nbsp;New Article
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <i class="ion-gear-a"></i>&nbsp;Settings
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                Sign in
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                Sign up
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  );
+};
+
+export default Header;
