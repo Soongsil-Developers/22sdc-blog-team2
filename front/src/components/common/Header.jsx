@@ -7,13 +7,9 @@ const Header = () => {
       <nav class="navbar navbar-light">
         <div class="container">
           <a class="navbar-brand" href="index.html">
-            {' '}
-            {헤더이름}
             conduit
           </a>
           <ul class="nav navbar-nav pull-xs-right">
-            {' '}
-            {네비게이션바5개}
             <li class="nav-item">
               {/* <!-- Add "active" class when you're on that page" --> */}
               <a class="nav-link active" href="">
