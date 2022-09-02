@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -12,29 +13,29 @@ const Header = () => {
           <ul class="nav navbar-nav pull-xs-right">
             <li class="nav-item">
               {/* <!-- Add "active" class when you're on that page" --> */}
-              <a class="nav-link active" href="">
+              <Link to="/" class="nav-link active">
                 Home
-              </a>
+              </Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">
+              <Link to="/article2" class="nav-link">
                 <i class="ion-compose"></i>&nbsp;New Article
-              </a>
+              </Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">
+              <Link to="/settings" class="nav-link">
                 <i class="ion-gear-a"></i>&nbsp;Settings
-              </a>
+              </Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">
+              <Link to="/signin" class="nav-link">
                 Sign in
-              </a>
+              </Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">
+              <Link to="signup" class="nav-link" href="">
                 Sign up
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
