@@ -1,8 +1,10 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 const Article = () => {
   return (
     <div>
+      {/* <!-- HEADER --> */}
       <nav class="navbar navbar-light">
         <div class="container">
           <a class="navbar-brand" href="index.html">
@@ -10,6 +12,7 @@ const Article = () => {
           </a>
           <ul class="nav navbar-nav pull-xs-right">
             <li class="nav-item">
+              {/* <!-- Add "active" class when you're on that page" --> */}
               <a class="nav-link active" href="">
                 Home
               </a>
@@ -38,6 +41,7 @@ const Article = () => {
         </div>
       </nav>
 
+      {/* <!-- Article --> */}
       <div class="article-page">
         <div class="banner">
           <div class="container">
@@ -176,6 +180,7 @@ const Article = () => {
         </div>
       </div>
 
+      {/* <!-- FOOTER --> */}
       <footer>
         <div class="container">
           <a href="/" class="logo-font">
