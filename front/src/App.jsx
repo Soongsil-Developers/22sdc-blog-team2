@@ -5,8 +5,9 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 
-import Signin from './components/Signin';
+// import Signin from './components/Signin';
 import Signup from './components/Signup';
+import Signin from './components/Signin';
 
 import Home from './components/Home';
 import Article from './components/Article';
