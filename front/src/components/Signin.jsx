@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const Signin = () => {
+const Signin = ({ form, onChange, onSubmit }) => {
   return (
     <div>
       <div class="auth-page">
@@ -17,12 +17,14 @@ const Signin = () => {
                 <li>That email is already taken</li>
               </ul>
 
-              <form>
+              <form onSubmit={onSubmit}>
                 <fieldset class="form-group">
                   <input
                     class="form-control form-control-lg"
                     type="text"
                     placeholder="Email"
+                    onChange={onChange}
+                    value={form.username}
                   />
                 </fieldset>
                 <fieldset class="form-group">
@@ -30,6 +32,8 @@ const Signin = () => {
                     class="form-control form-control-lg"
                     type="password"
                     placeholder="Password"
+                    onChange={onChange}
+                    value={form.password}
                   />
                 </fieldset>
                 <button class="btn btn-lg btn-primary pull-xs-right">

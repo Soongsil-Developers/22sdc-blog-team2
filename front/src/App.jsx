@@ -5,8 +5,9 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 
-import Signin from './components/Signin';
+// import Signin from './components/Signin';
 import Signup from './components/Signup';
+import LoginForm from './containers/auth/LoginForm';
 
 import Home from './components/Home';
 import Article from './components/Article';
@@ -21,7 +22,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signin" element={<Signin />} />
+        <Route path="/signin" element={<LoginForm />} />
         <Route path="/signup" element={<Signup />} />
 
         <Route path="/settings" element={<Settings />} />

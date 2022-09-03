@@ -14,7 +14,7 @@ export const changeField = createAction(
 );
 export const initailizeForm = createAction(INITIALIZE_FORM, (form) => form);
 
-const initialState = {
+export const initialState = {
   register: {
     username: '',
     password: '',

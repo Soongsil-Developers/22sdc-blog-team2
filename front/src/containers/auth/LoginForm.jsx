@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeField, initializeForm } from '../../modules/auth';
-import AuthForm from '../../components/auth/AuthForm';
+import { changeField, initailizeForm } from '../../modules/auth';
+import Signin from '../../components/Signin';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -55,12 +55,7 @@ const LoginForm = () => {
   // }, [navigate, user]);
 
   return (
-    <AuthForm
-      type="login"
-      form={form}
-      onChange={onChange}
-      onSubmit={onSubmit}
-    />
+    <Signin type="login" form={form} onChange={onChange} onSubmit={onSubmit} />
   );
 };
 
