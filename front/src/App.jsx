@@ -15,9 +15,17 @@ import CreateEditArticle from './components/CreateEditArticle';
 import Profile from './components/Profile';
 import Settings from './components/Settings';
 
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
+
 function App() {
   return (
-    <div>
+    <RecoilRoot>
       <Header />
 
       <Routes>
@@ -32,7 +40,7 @@ function App() {
       </Routes>
 
       <Footer />
-    </div>
+    </RecoilRoot>
   );
 }
 
