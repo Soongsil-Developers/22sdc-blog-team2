@@ -1,4 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
+const getNumber = () => {
+  return 10;
+};
+
+const a = getNumber();
 
 const Article = () => {
   return (
