@@ -1,5 +1,4 @@
 // @ts-check
-
 import axios from 'axios';
 
 const conduitAxios = axios.create({
@@ -22,7 +21,7 @@ const postUsers = (user) => conduitAxios.post(`/users`);
  * @returns {Promise<{ user: { email: string; token: string; username: string; bio: string; image: string } }>}
  */
 const getUser = (username) => conduitAxios.get(`/user`);
-postUsers({});
+
 /**
  * @param {string} username
  * @returns {Promise<{ user: { email: string; token: string; username: string; bio: string; image: string } }>}
@@ -101,22 +100,21 @@ const deleteArticle = (slug) => conduitAxios.delete(`/articles/${slug}`);
 // comments
 /**
  * @param {string} slug
- * @returns {Promise<{ comments: [
- *  {
- *     id: number;
- *     createdAt: string;
- *     updatedAt: string;
- *     body: string;
- *     author: {
- *       username: string;
- *       bio: string;
- *       image: string;
- *       following: boolean
- *     }
- *   }
- * ]
- *
- *
+ * @returns {Promise<{
+ *  comments: [
+ *    {
+ *      id: number;
+ *      createdAt: string;
+ *      updatedAt: string;
+ *      body: string;
+ *      author: {
+ *        username: string;
+ *        bio: string;
+ *        image: string;
+ *        following: boolean
+ *      }
+ *    }
+ *   ]
  * }>}
  */
 const getComments = (slug) => conduitAxios.get(`/articles/${slug}/comments`);
