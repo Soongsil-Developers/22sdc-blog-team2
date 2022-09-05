@@ -10,6 +10,7 @@
     "doc": "jsdoc -c jsdoc.json"
   },
   "dependencies": {
+    "@types/axios": "^0.14.0",
     "immer": "^9.0.15",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",

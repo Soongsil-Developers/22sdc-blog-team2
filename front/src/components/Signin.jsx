@@ -1,5 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist();
+const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
+const token = window.location.href.split('?token=')[1];
+
+export const LoginState =
+  atom <
+  boolean >
+  {
+    key: 'LoginState',
+    default: false,
+    effects_UNSTABLE: { persistAtom },
+  };
+
+useEffect(() => {
+  if (token) localStorage.setItem('4242-token', token);
+  if (localStorage.getItem('4242-token')) setIsLoggedIn(true);
+}, []);
 
 const Signin = () => {
   return (

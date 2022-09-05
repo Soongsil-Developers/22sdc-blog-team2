@@ -1,3 +1,5 @@
+// @ts-check
+
 import axios from 'axios';
 
 const conduitAxios = axios.create({
@@ -7,19 +9,20 @@ const conduitAxios = axios.create({
 // user
 /**
  * @param {string} username
- * @returns {Promise<{ user: {email: string; token: string; username: string; bio: string; image: string}}}
+ * @returns {Promise<{ user: {email: string; token: string; username: string; bio: string; image: string}}>}
  */
 const postUsersLogin = (username) => conduitAxios.post(`/users/login`);
 /**
- * @param {string} username
- * @returns {Promise<{ user: {email: string; token: string; username: string; bio: string; image: string}}}
+ * @param {{email: string; token: string; username: string; bio: string; image: string}} user
+ * @returns {Promise<{ user: {email: string; token: string; username: string; bio: string; image: string}}>}
  */
-const postUsers = (username) => conduitAxios.post(`/users`);
+const postUsers = (user) => conduitAxios.post(`/users`);
 /**
  * @param {string} username
  * @returns {Promise<{ user: { email: string; token: string; username: string; bio: string; image: string } }>}
  */
 const getUser = (username) => conduitAxios.get(`/user`);
+postUsers({});
 /**
  * @param {string} username
  * @returns {Promise<{ user: { email: string; token: string; username: string; bio: string; image: string } }>}
@@ -140,7 +143,7 @@ const getComments = (slug) => conduitAxios.get(`/articles/${slug}/comments`);
 const postComments = (slug) => conduitAxios.post(`/articles/${slug}/comments`);
 /**
  * @param {string} slug
- * @param {integer} id
+ * @param {number} id
  */
 const deleteComments = (slug, id) =>
   conduitAxios.delete(`/articles/${slug}/comments/${id}`);
