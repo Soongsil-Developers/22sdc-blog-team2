@@ -1,4 +1,5 @@
 // @ts-check
+
 import axios from 'axios';
 
 const conduitAxios = axios.create({
@@ -157,8 +158,6 @@ const getComments = (slug) => conduitAxios.get(`/articles/${slug}/comments`);
  *     }
  *   }
  * ]
- *
- *
  * }>}
  */
 const postComments = (slug) => conduitAxios.post(`/articles/${slug}/comments`);

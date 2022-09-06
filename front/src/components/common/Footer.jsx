@@ -1,3 +1,5 @@
+//@ts-check
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -5,11 +7,11 @@ const Footer = () => {
   return (
     <div>
       <footer>
-        <div class="container">
-          <a href="/" class="logo-font">
+        <div className="container">
+          <a href="/" className="logo-font">
             conduit
           </a>
-          <span class="attribution">
+          <span className="attribution">
             An interactive learning project from{' '}
             <a href="https://thinkster.io">Thinkster</a>. Code &amp; design
             licensed under MIT.
