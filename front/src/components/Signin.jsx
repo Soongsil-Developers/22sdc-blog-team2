@@ -1,27 +1,21 @@
 //@ts-check
 
-import { atom } from 'recoil';
-import { recoilPersist } from 'recoil-persist';
-
-const { persistAtom } = recoilPersist();
-const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
-const token = window.location.href.split('?token=')[1];
-
-export const LoginState =
-  atom <
-  boolean >
-  {
-    key: 'LoginState',
-    default: false,
-    effects_UNSTABLE: { persistAtom },
-  };
-
-useEffect(() => {
-  if (token) localStorage.setItem('4242-token', token);
-  if (localStorage.getItem('4242-token')) setIsLoggedIn(true);
-}, []);
+import { useRecoilState } from 'recoil';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { LoginState } from '../atoms/Login';
+import { postUsersLogin } from '../remotes';
 
 const Signin = () => {
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (isLoggedIn) {
+    }
+  }, [isLoggedIn]);
+
   return (
     <div>
       <div className="auth-page">
@@ -37,12 +31,24 @@ const Signin = () => {
                 <li>That email is already taken</li>
               </ul>
 
-              <form>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+
+                  postUsersLogin({ email, password }).then((res) => {
+                    if (res.user) {
+                      setIsLoggedIn(true);
+                      localStorage.setItem('token', res.user.token);
+                    }
+                  });
+                }}
+              >
                 <fieldset className="form-group">
                   <input
                     className="form-control form-control-lg"
                     type="text"
                     placeholder="Email"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </fieldset>
                 <fieldset className="form-group">
@@ -50,6 +56,7 @@ const Signin = () => {
                     className="form-control form-control-lg"
                     type="password"
                     placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </fieldset>
                 <button className="btn btn-lg btn-primary pull-xs-right">

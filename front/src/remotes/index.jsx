@@ -3,7 +3,12 @@
 import axios from 'axios';
 
 const conduitAxios = axios.create({
-  baseURL: 'https://conduit.productionready.io/api',
+  baseURL:
+    // 'https://api.realworld.io/api-docs/#/User%20and%20Authentication/Login',
+    'https://api.realworld.io/api-docs/',
+  // headers: {
+  //   'Content-Type': 'application/json',
+  // },
 });
 
 /**
@@ -63,7 +68,7 @@ const conduitAxios = axios.create({
 // ㅡㅡㅡㅡㅡ User ㅡㅡㅡㅡㅡ
 /**
  * @param {{ email: string; password: string;}} user
- * @returns {Promise<{ data: { user: User }}>}
+ * @returns {Promise<{ user: User }>}
  */
 const postUsersLogin = (user) => conduitAxios.post(`/users/login`);
 
