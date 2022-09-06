@@ -6,57 +6,80 @@ const conduitAxios = axios.create({
   baseURL: 'https://conduit.productionready.io/api',
 });
 
-// user
 /**
- * @param {string} username
- * @returns {Promise<{ user: {email: string; token: string; username: string; bio: string; image: string}}>}
+ * @typedef {Object} User
+ * @property {string} email
+ * @property {string} token
+ * @property {string} username
+ * @property {string} bio
+ * @property {string} image
+ *
  */
-const postUsersLogin = (username) => conduitAxios.post(`/users/login`);
+
 /**
- * @param {{email: string; token: string; username: string; bio: string; image: string}} user
- * @returns {Promise<{ user: {email: string; token: string; username: string; bio: string; image: string}}>}
+ * @typedef {Object} Profile
+ * @property {string} username
+ * @property {string} bio
+ * @property {string} image
+ * @property {boolean} following
+ *
+ */
+
+// ㅡㅡㅡㅡㅡ User ㅡㅡㅡㅡㅡ
+/**
+ * @param {{ email: string; password: string;}} user
+ * @returns {Promise<{ data: { user: User }}>}
+ */
+const postUsersLogin = (user) => conduitAxios.post(`/users/login`);
+
+/**
+ * @param {{username: string; email: string; password: string;}} user
+ * @returns {Promise<{ data: { user: User }}>}
  */
 const postUsers = (user) => conduitAxios.post(`/users`);
-/**
- * @param {string} username
- * @returns {Promise<{ user: { email: string; token: string; username: string; bio: string; image: string } }>}
- */
-const getUser = (username) => conduitAxios.get(`/user`);
-postUsers({});
-/**
- * @param {string} username
- * @returns {Promise<{ user: { email: string; token: string; username: string; bio: string; image: string } }>}
- */
-const putUser = (username) => conduitAxios.put(`/user`);
 
-// profile
 /**
- * @param {string} username
- * @returns {Promise<{ profile: { username: string; bio: string; image: string; following: boolean; } }>}
+ * @returns {Promise<{ data: { user: User }}>}
+ */
+const getUser = () => conduitAxios.get(`/user`);
+
+/**
+ * @param {{user: User}} user
+ * @returns {Promise<{ data: { user: User }}>}
+ */
+const putUser = (user) => conduitAxios.put(`/user`);
+
+// ㅡㅡㅡㅡㅡ Profile ㅡㅡㅡㅡㅡ
+/**
+ * @param {{string}} username
+ * @returns {Promise<{ data: { profile: Profile }}>}
  */
 const getProfile = (username) => conduitAxios.get(`/profiles/${username}`);
+
 /**
  * @param {string} username
- * @returns {Promise<{ profile: { username: string; bio: string; image: string; following: boolean; } }>}
+ * @returns {Promise<{ data: { profile: Profile }}>}
  */
 const postProfile = (username) =>
   conduitAxios.post(`/profiles/${username}/follow`);
+
 /**
  * @param {string} username
- * @returns {Promise<{ profile: { username: string; bio: string; image: string; following: boolean; } }>}
+ * @returns {Promise<{ data: { profile: Profile }}>}
  */
 const deleteProfile = (username) =>
   conduitAxios.delete(`/profiles/${username}/follow`);
 
 // article
 /**
- * @param {string} feed
+ * @param {number} limit
+ * @param {number} offset
  * @returns {Promise<{ articles: [ { slug: string; title: string; description: string; body: string;
  * tagList: [string]; createdAt: string;updatedAt: string;favorited: boolean;favoritesCount: number;
  * author: {username: string;bio: string;image: string;following: boolean}}];
  *                     articlesCount: number;}>}
  */
-const getArticleFeed = (feed) => conduitAxios.get(`/articles/feed`);
+const getArticleFeed = (limit, offset) => conduitAxios.get(`/articles/feed`);
 /**
  * @param {string} articles
  * @returns {Promise<{ articles: [ { slug: string; title: string; description: string; body: string;
