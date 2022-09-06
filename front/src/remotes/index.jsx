@@ -25,6 +25,41 @@ const conduitAxios = axios.create({
  *
  */
 
+/**
+ * @typedef {Object} Comments
+ * @property {number} id
+ * @property {string} createdAt
+ * @property {string} updatedAt
+ * @property {string} body
+ * @property {Object} author
+ * @property {string} username
+ * @property {string} bio
+ * @property {string} image
+ * @property {boolean} following
+ */
+
+/**
+ * @typedef {Object} Article
+ * @property {string} slug
+ * @property {string} title
+ * @property {string} description
+ * @property {string} body
+ * @property {Array<string>} tagList
+ * @property {string} createdAt
+ * @property {string} updatedAt
+ * @property {boolean} favorited
+ * @property {number} favoritesCount //articles에서 이 부분만 추가된거니 omit 사용하면 되려나
+ * @property {Object} author
+ * @property {string} username
+ * @property {string} bio
+ * @property {string} image
+ * @property {boolean} following
+ */
+
+/**
+ * @typedef {Array<string>} tags
+ */
+
 // ㅡㅡㅡㅡㅡ User ㅡㅡㅡㅡㅡ
 /**
  * @param {{ email: string; password: string;}} user
@@ -70,129 +105,92 @@ const postProfile = (username) =>
 const deleteProfile = (username) =>
   conduitAxios.delete(`/profiles/${username}/follow`);
 
-// article
+// ㅡㅡㅡㅡㅡ Articles ㅡㅡㅡㅡㅡ
 /**
- * @param {number} limit
- * @param {number} offset
- * @returns {Promise<{ articles: [ { slug: string; title: string; description: string; body: string;
- * tagList: [string]; createdAt: string;updatedAt: string;favorited: boolean;favoritesCount: number;
- * author: {username: string;bio: string;image: string;following: boolean}}];
- *                     articlesCount: number;}>}
+ * @param {{number}} limit //default 값은 어떻게 처리할까
+ * @param {{number}} offset
+ * @returns {Promise<{ data: { article: Omit<Article, 'favoritesCount'>  }}>}
  */
 const getArticleFeed = (limit, offset) => conduitAxios.get(`/articles/feed`);
-/**
- * @param {string} articles
- * @returns {Promise<{ articles: [ { slug: string; title: string; description: string; body: string;
- * tagList: [string]; createdAt: string;updatedAt: string;favorited: boolean;favoritesCount: number;
- * author: {username: string;bio: string;image: string;following: boolean}}];
- *                     articlesCount: number;}>}
- */
-const getArticle = (articles) => conduitAxios.get(`/articles`);
-/**
- * @param {string} articles
- * @returns {Promise<{ articles: [ { slug: string; title: string; description: string; body: string;
- * tagList: [string]; createdAt: string;updatedAt: string;favorited: boolean;favoritesCount: number;
- * author: {username: string;bio: string;image: string;following: boolean}}];
- *                     articlesCount: number;}>}
- */
-const postArticle = (articles) => conduitAxios.post(`/articles`);
-/**
- * @param {string} slug
- * @returns {Promise<{ articles: [ { slug: string; title: string; description: string; body: string;
- * tagList: [string]; createdAt: string;updatedAt: string;favorited: boolean;favoritesCount: number;
- * author: {username: string;bio: string;image: string;following: boolean}}];
- *                     articlesCount: number;}>}
- */
-const getArticleSlug = (slug) => conduitAxios.get(`/articles/${slug}`);
-/**
- * @param {string} slug
- * @returns {Promise<{ articles: [ { slug: string; title: string; description: string; body: string;
- * tagList: [string]; createdAt: string;updatedAt: string;favorited: boolean;favoritesCount: number;
- * author: {username: string;bio: string;image: string;following: boolean}}];
- *                     articlesCount: number;}>}
- */
-const putArticle = (slug) => conduitAxios.put(`/articles/${slug}`);
-/**
- * @param {string} slug
- * @returns {Promise<{ articles: [ { slug: string; title: string; description: string; body: string;
- * tagList: [string]; createdAt: string;updatedAt: string;favorited: boolean;favoritesCount: number;
- * author: {username: string;bio: string;image: string;following: boolean}}];
- *                     articlesCount: number;}>}
- */
-const deleteArticle = (slug) => conduitAxios.delete(`/articles/${slug}`);
 
-// comments
+/**
+ * @param {{string}} tag
+ * @param {{string}} author
+ * @param {{string}} favorited
+ * @param {{number}} limit
+ * @param {{number}} offset
+ * @returns {Promise<{ data: { article: Omit<Article, 'favoritesCount'>  }}>}
+ */
+const getArticles = (tag, author, favorited, limit, offset) =>
+  conduitAxios.get(`/articles`);
+
+/**
+ * @param {{title:string; description:string; body:string; tagList:Array<string>}} article
+ * @returns {Promise<{ data: { article: Omit<Article, 'favoritesCount'>  }}>}
+ */
+const postArticles = (article) => conduitAxios.post(`/articles`);
+
+/**
+ * @param {{string}} slug
+ * @returns {Promise<{ data: { article: Omit<Article, 'favoritesCount'>  }}>}
+ */
+const getArticlesSlug = (slug) => conduitAxios.get(`/articles/${slug}`);
+
+/**
+ * @param {{string}} slug
+ * @param {{title:string; description:string; body:string}} article
+ * @returns {Promise<{ data: { article: Omit<Article, 'favoritesCount'>  }}>}
+ */
+const putArticlesSlug = (slug, article) =>
+  conduitAxios.put(`/articles/${slug}`);
+
 /**
  * @param {string} slug
- * @returns {Promise<{
- *  comments: [
- *    {
- *      id: number;
- *      createdAt: string;
- *      updatedAt: string;
- *      body: string;
- *      author: {
- *        username: string;
- *        bio: string;
- *        image: string;
- *        following: boolean
- *      }
- *    }
- *   ]
- * }>}
+ */
+const deleteArticlesSlug = (slug) => conduitAxios.delete(`/articles/${slug}`);
+
+// ㅡㅡㅡㅡㅡ Comments ㅡㅡㅡㅡㅡ
+/**
+ * @param {{string}} slug
+ * @returns {Promise<{ data: { comments: Article }}>}
  */
 const getComments = (slug) => conduitAxios.get(`/articles/${slug}/comments`);
+
 /**
- * @param {string} slug
- * @returns {Promise<{ comments: [
- *  {
- *     id: number;
- *     createdAt: string;
- *     updatedAt: string;
- *     body: string;
- *     author: {
- *       username: string;
- *       bio: string;
- *       image: string;
- *       following: boolean
- *     }
- *   }
- * ]
- * }>}
+ * @param {{string}} slug
+ * @param {{body: string}} comment
+ * @returns {Promise<{ data: { comments: Article }}>}
  */
-const postComments = (slug) => conduitAxios.post(`/articles/${slug}/comments`);
+const postComments = (slug, comment) =>
+  conduitAxios.post(`/articles/${slug}/comments`);
+
 /**
- * @param {string} slug
- * @param {number} id
+ * @param {{string}} slug
+ * @param {{number}} id
+ * @returns {Promise<{ data: { comments: Article }}>}
  */
 const deleteComments = (slug, id) =>
   conduitAxios.delete(`/articles/${slug}/comments/${id}`);
 
-//favorites
+// ㅡㅡㅡㅡㅡ Favorites ㅡㅡㅡㅡㅡ
 /**
- * @param {string} slug
- * @returns {Promise<{ articles: [ { slug: string; title: string; description: string; body: string;
- * tagList: [string]; createdAt: string;updatedAt: string;favorited: boolean;favoritesCount: number;
- * author: {username: string;bio: string;image: string;following: boolean}}]
- * }>}
+ * @param {{ string }} slug
+ * @returns {Promise<{ data: { article: Article }}>}
  */
-const postFavoirtes = (slug) => conduitAxios.post(`/articles/${slug}/favorite`);
+const postFavorites = (slug) => conduitAxios.post(`/articles/${slug}/favorite`);
+
 /**
- * @param {string} slug
- * @returns {Promise<{ articles: [ { slug: string; title: string; description: string; body: string;
- * tagList: [string]; createdAt: string;updatedAt: string;favorited: boolean;favoritesCount: number;
- * author: {username: string;bio: string;image: string;following: boolean}}]
- * }>}
+ * @param {{ string }} slug
+ * @returns {Promise<{ data: { article: Article }}>}
  */
-const deleteFavoirtes = (slug) =>
+const deleteFavorites = (slug) =>
   conduitAxios.delete(`/articles/${slug}/favorite`);
 
-//default
+// ㅡㅡㅡㅡㅡ default ㅡㅡㅡㅡㅡ
 /**
- * @param {string} tags
- * @returns {Promise<{ tags: [string] }>}
+ * @returns {Promise<{ data: { tag: tags }}>}
  */
-const getDefault = (tags) => conduitAxios.get(`/tags`);
+const getTags = () => conduitAxios.get(`/tags`);
 
 export {
   postUsersLogin,
@@ -203,15 +201,14 @@ export {
   postProfile,
   deleteProfile,
   getArticleFeed,
-  getArticle,
-  postArticle,
-  getArticleSlug,
-  putArticle,
-  deleteArticle,
+  postArticles,
+  getArticlesSlug,
+  putArticlesSlug,
+  deleteArticlesSlug,
   getComments,
   postComments,
   deleteComments,
-  postFavoirtes,
-  deleteFavoirtes,
-  getDefault,
+  postFavorites,
+  deleteFavorites,
+  getTags,
 };
