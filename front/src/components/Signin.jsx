@@ -16,7 +16,6 @@ const Signin = () => {
     }
   }, [isLoggedIn]);
 
-
   return (
     <div>
       <div className="auth-page">
@@ -45,7 +44,6 @@ const Signin = () => {
                 }}
               >
                 <fieldset className="form-group">
-
                   <input
                     className="form-control form-control-lg"
                     type="text"
@@ -64,10 +62,8 @@ const Signin = () => {
 
                 <button
                   type="button"
-                  class="btn btn-lg btn-primary pull-xs-right"
-                  onClick={onClickSubmitHandler}
+                  className="btn btn-lg btn-primary pull-xs-right"
                 >
-
                   Sign In
                 </button>
               </form>
