@@ -36,4 +36,5 @@ export const updateUserState = atom({
 export const updateUserRequestState = atom({
   key: 'src/atoms/User.jsx-updateUserRequestState',
   default: {},
+
 });
