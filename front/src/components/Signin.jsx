@@ -16,6 +16,7 @@ const Signin = () => {
     }
   }, [isLoggedIn]);
 
+
   return (
     <div>
       <div className="auth-page">
@@ -44,6 +45,7 @@ const Signin = () => {
                 }}
               >
                 <fieldset className="form-group">
+
                   <input
                     className="form-control form-control-lg"
                     type="text"
@@ -59,7 +61,13 @@ const Signin = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </fieldset>
-                <button className="btn btn-lg btn-primary pull-xs-right">
+
+                <button
+                  type="button"
+                  class="btn btn-lg btn-primary pull-xs-right"
+                  onClick={onClickSubmitHandler}
+                >
+
                   Sign In
                 </button>
               </form>
