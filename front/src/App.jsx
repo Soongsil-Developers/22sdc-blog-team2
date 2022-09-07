@@ -1,6 +1,15 @@
+//@ts-check
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Routes } from 'react-router-dom';
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
 
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';

@@ -1,3 +1,5 @@
+//@ts-check
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
@@ -5,35 +7,35 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <div>
-      <nav class="navbar navbar-light">
-        <div class="container">
-          <a class="navbar-brand" href="index.html">
+      <nav className="navbar navbar-light">
+        <div className="container">
+          <a className="navbar-brand" href="index.html">
             conduit
           </a>
-          <ul class="nav navbar-nav pull-xs-right">
-            <li class="nav-item">
-              {/* <!-- Add "active" class when you're on that page" --> */}
-              <Link to="/" class="nav-link active">
+          <ul className="nav navbar-nav pull-xs-right">
+            <li className="nav-item">
+              {/* <!-- Add "active" className when you're on that page" --> */}
+              <Link to="/" className="nav-link active">
                 Home
               </Link>
             </li>
-            <li class="nav-item">
-              <Link to="/article2" class="nav-link">
-                <i class="ion-compose"></i>&nbsp;New Article
+            <li className="nav-item">
+              <Link to="/article2" className="nav-link">
+                <i className="ion-compose"></i>&nbsp;New Article
               </Link>
             </li>
-            <li class="nav-item">
-              <Link to="/settings" class="nav-link">
-                <i class="ion-gear-a"></i>&nbsp;Settings
+            <li className="nav-item">
+              <Link to="/settings" className="nav-link">
+                <i className="ion-gear-a"></i>&nbsp;Settings
               </Link>
             </li>
-            <li class="nav-item">
-              <Link to="/signin" class="nav-link">
+            <li className="nav-item">
+              <Link to="/signin" className="nav-link">
                 Sign in
               </Link>
             </li>
-            <li class="nav-item">
-              <Link to="signup" class="nav-link" href="">
+            <li className="nav-item">
+              <Link to="signup" className="nav-link">
                 Sign up
               </Link>
             </li>
