@@ -1,6 +1,7 @@
 // @ts-check
-
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Signin from '../components/Signin';
 
 const conduitAxios = axios.create({
   baseURL:
@@ -68,9 +69,25 @@ const conduitAxios = axios.create({
 // ㅡㅡㅡㅡㅡ User ㅡㅡㅡㅡㅡ
 /**
  * @param {{ email: string; password: string;}} user
- * @returns {Promise<{ user: User }>}
+ * @returns {Promise<{ data: { user: User }}>}
  */
 const postUsersLogin = (user) => conduitAxios.post(`/users/login`);
+postUsersLogin()
+  .then((res) => {
+    console.log(res);
+    console.log(`res.data.email :: ${res.data.user.email}`);
+    if (res.data.user.email === undefined) {
+      console.log(`입력하신 id가 일치하지 않습니다`);
+    } else if (res.data.user.email === null) {
+      console.log(`입력하신 비밀번호가 일치하지 않습니다`);
+    } else if (res.data.user.email === props.email) {
+      console.log(`로그인 성공`);
+    }
+    document.location.href = '/';
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 
 /**
  * @param {{username: string; email: string; password: string;}} user
