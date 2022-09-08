@@ -4,9 +4,7 @@ import axios from 'axios';
 import Signin from '../components/Signin';
 
 const conduitAxios = axios.create({
-  baseURL:
-    // 'https://api.realworld.io/api-docs/#/User%20and%20Authentication/Login',
-    'https://api.realworld.io/api-docs/',
+  baseURL: 'https://api.realworld.io/api',
   // headers: {
   //   'Content-Type': 'application/json',
   // },
