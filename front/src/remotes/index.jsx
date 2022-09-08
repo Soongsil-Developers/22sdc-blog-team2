@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Signin from '../components/Signin';
+import { articleState } from '../atoms/Article';
 
 const conduitAxios = axios.create({
   baseURL: 'https://api.realworld.io/api',
@@ -71,7 +72,7 @@ const conduitAxios = axios.create({
  */
 const postUsersLogin = (user) =>
   conduitAxios.post(`/users/login`, {
-    data: { email: user.email, password: user.password },
+    data: { email: user.email, password: user.password }, //더 받아오기
   });
 
 /**
@@ -116,9 +117,19 @@ const deleteProfile = (username) =>
 /**
  * @param {{number}} limit //default 값은 어떻게 처리할까
  * @param {{number}} offset
- * @returns {Promise<{ data: { article: Omit<Article, 'favoritesCount'>  }}>}
+ * @returns {Promise<{ data: { article: Article  }}>}
  */
-const getArticleFeed = (limit, offset) => conduitAxios.get(`/articles/feed`);
+//  * @returns {Promise<{ data: { article: Omit<Article, 'favoritesCount'>  }}>}
+const getArticleFeed = (limit, offset) =>
+  conduitAxios.get(`/articles/feed`, {
+    data: {
+      author: article.author,
+      createdAt: article.createdAt,
+      favoritesCount: article.favoritesCount,
+      title: article.title,
+      description: article.description,
+    },
+  });
 
 /**
  * @param {{string}} tag
@@ -208,6 +219,7 @@ export {
   postProfile,
   deleteProfile,
   getArticleFeed,
+  getArticles,
   postArticles,
   getArticlesSlug,
   putArticlesSlug,
