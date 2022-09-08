@@ -1,11 +1,10 @@
 // @ts-check
-
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Signin from '../components/Signin';
 
 const conduitAxios = axios.create({
-  baseURL:
-    // 'https://api.realworld.io/api-docs/#/User%20and%20Authentication/Login',
-    'https://api.realworld.io/api-docs/',
+  baseURL: 'https://api.realworld.io/api',
   // headers: {
   //   'Content-Type': 'application/json',
   // },
@@ -67,10 +66,13 @@ const conduitAxios = axios.create({
 
 // ㅡㅡㅡㅡㅡ User ㅡㅡㅡㅡㅡ
 /**
- * @param {{ email: string; password: string;}} user
- * @returns {Promise<{ user: User }>}
+ * @param {{email: string; password: string;}} user
+ * @returns {Promise<{ data: { user: User }}>}
  */
-const postUsersLogin = (user) => conduitAxios.post(`/users/login`);
+const postUsersLogin = (user) =>
+  conduitAxios.post(`/users/login`, {
+    data: { email: user.email, password: user.password },
+  });
 
 /**
  * @param {{username: string; email: string; password: string;}} user

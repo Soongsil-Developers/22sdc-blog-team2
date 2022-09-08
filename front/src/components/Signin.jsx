@@ -36,9 +36,9 @@ const Signin = () => {
                   e.preventDefault();
 
                   postUsersLogin({ email, password }).then((res) => {
-                    if (res.user) {
+                    if (res.data.user) {
                       setIsLoggedIn(true);
-                      localStorage.setItem('token', res.user.token);
+                      localStorage.setItem('token', res.data.user.token);
                     }
                   });
                 }}
