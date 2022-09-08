@@ -61,7 +61,7 @@ const Signin = () => {
                 </fieldset>
 
                 <button
-                  type="button"
+                  type="submit"
                   className="btn btn-lg btn-primary pull-xs-right"
                 >
                   Sign In
