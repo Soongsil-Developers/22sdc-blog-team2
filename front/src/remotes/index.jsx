@@ -51,7 +51,7 @@ const conduitAxios = axios.create({
  * @property {string} updatedAt
  * @property {boolean} favorited
  * @property {number} favoritesCount //articles에서 이 부분만 추가된거니 omit 사용하면 되려나
- * @property {Object} author
+ * @property {Profile} author
  * @property {string} username
  * @property {string} bio
  * @property {string} image
@@ -91,7 +91,7 @@ const putUser = (user) => conduitAxios.put(`/user`);
 
 // ㅡㅡㅡㅡㅡ Profile ㅡㅡㅡㅡㅡ
 /**
- * @param {{string}} username
+ * @param {string} username
  * @returns {Promise<{ data: { profile: Profile }}>}
  */
 const getProfile = (username) => conduitAxios.get(`/profiles/${username}`);
@@ -111,14 +111,18 @@ const deleteProfile = (username) =>
   conduitAxios.delete(`/profiles/${username}/follow`);
 
 // ㅡㅡㅡㅡㅡ Articles ㅡㅡㅡㅡㅡ
+/**
+ *
+ * @returns {Promise<{ data: { articles: Article, articlesCount: number } }>}
+ */
 const getArticleFeed = () => conduitAxios.get(`/articles?limit=30&offset=0`);
 
 /**
- * @param {{string}} tag
- * @param {{string}} author
- * @param {{string}} favorited
- * @param {{number}} limit
- * @param {{number}} offset
+ * @param {string} tag
+ * @param {string} author
+ * @param {string} favorited
+ * @param {number} limit
+ * @param {number} offset
  * @returns {Promise<{ data: { article: Omit<Article, 'favoritesCount'>  }}>}
  */
 const getArticles = (tag, author, favorited, limit, offset) =>

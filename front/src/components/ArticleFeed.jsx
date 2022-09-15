@@ -1,23 +1,30 @@
 //@ts-check
 
-function ArticleFeed({
-  author,
-  createdAt,
-  description,
-  favoritesCount,
-  slug,
-  title,
-  updatedAt,
-}) {
+/**
+ *
+ * @param {{ article: import('../remotes').Article }} props
+ * @returns
+ */
+function ArticleFeed({ article }) {
+  const {
+    author,
+    createdAt,
+    description,
+    favoritesCount,
+    slug,
+    title,
+    updatedAt,
+  } = article;
+
   return (
     <div className="article-preview">
       <div className="article-meta">
         <a href="profile.html">
-          <img src="http://i.imgur.com/Qr71crq.jpg" />
+          <img src={`${author.image}`} />
         </a>
         <div className="info">
           <a href="" className="author">
-            {author}
+            {author.username}
           </a>
           <span className="date">{createdAt}</span>
         </div>

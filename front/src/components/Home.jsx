@@ -7,13 +7,15 @@ import { getArticleFeed } from '../remotes';
 import { useEffect, useState } from 'react';
 
 const Home = () => {
+  /**
+   * @type {[import('../remotes').Article[], Function]} articles
+   */
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     getArticleFeed()
       .then((res) => {
-        // setArticles(res.data.article);
-        console.log(res.data.articles);
+        setArticles(res.data.articles);
       })
       .catch((err) => {
         console.log(err);
@@ -47,8 +49,8 @@ const Home = () => {
               </ul>
             </div>
 
-            {articles.map((data) => (
-              <ArticleFeed data={data} />
+            {articles.map((article, idx) => (
+              <ArticleFeed article={article} key={idx} />
             ))}
           </div>
 
