@@ -1,4 +1,4 @@
-//@ts-check
+// @ts-check
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -12,12 +12,13 @@ const Home = () => {
   useEffect(() => {
     getArticleFeed()
       .then((res) => {
-        setArticles(res.data.article);
+        // setArticles(res.data.article);
+        console.log(res.data.articles);
       })
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   return (
     <div className="home-page">
@@ -46,9 +47,9 @@ const Home = () => {
               </ul>
             </div>
 
-            {/* {articles.map((data) => (
+            {articles.map((data) => (
               <ArticleFeed data={data} />
-            ))} */}
+            ))}
           </div>
 
           <div className="col-md-3">

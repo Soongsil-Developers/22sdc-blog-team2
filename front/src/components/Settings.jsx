@@ -1,25 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Signin from './Signin';
+//@ts-check
 
 import { useRecoilState } from 'recoil';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { LoginState } from '../atoms/Login';
-import { postUsersLogin } from '../remotes';
 
 const Settings = () => {
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
-
-  const Logout = () => {
-    localStorage.removeItem('token');
-    // LoginState(false);
-    if (isLoggedIn) {
-      setIsLoggedIn(false);
-    }
-    document.location.href = '/';
-  };
-
   return (
     <div>
       <div className="settings-page">
@@ -47,7 +30,7 @@ const Settings = () => {
                   <fieldset className="form-group">
                     <textarea
                       className="form-control form-control-lg"
-                      rows="8"
+                      rows={8}
                       placeholder="Short bio about you"
                     ></textarea>
                   </fieldset>
@@ -71,7 +54,7 @@ const Settings = () => {
                 </fieldset>
               </form>
               <hr />
-              <button className="btn btn-outline-danger" onClick={Logout}>
+              <button className="btn btn-outline-danger">
                 Or click here to logout.
               </button>
             </div>

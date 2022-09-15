@@ -1,8 +1,5 @@
 // @ts-check
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Signin from '../components/Signin';
-import { articleState } from '../atoms/Article';
 
 const conduitAxios = axios.create({
   baseURL: 'https://api.realworld.io/api',
@@ -70,17 +67,17 @@ const conduitAxios = axios.create({
  * @param {{email: string; password: string;}} user
  * @returns {Promise<{ data: { user: User }}>}
  */
-const postUsersLogin = (user) =>
-  conduitAxios.post(`/users/login`, {
-    data: { email: user.email, password: user.password }, //더 받아오기
-  });
+const postUsersLogin = (user) => conduitAxios.post(`/users/login`, { user });
 
 /**
  * @param {{username: string; email: string; password: string;}} user
  * @returns {Promise<{ data: { user: User }}>}
  */
-const postUsers = (user) => conduitAxios.post(`/users`);
-
+const postUsers = (user) =>
+  conduitAxios.post(
+    `/users`,
+    { user }, //더 받아오기
+  );
 /**
  * @returns {Promise<{ data: { user: User }}>}
  */
@@ -115,31 +112,6 @@ const deleteProfile = (username) =>
 
 // ㅡㅡㅡㅡㅡ Articles ㅡㅡㅡㅡㅡ
 const getArticleFeed = () => conduitAxios.get(`/articles?limit=30&offset=0`);
-/**
-   @returns {{articles: [
-    {
-      slug: string;
-  title: string;
-  description: string;
-  body: string;
-  tagList: [
-    string
-  ];
-  createdAt: 2022-09-11T06:38:57.899Z;
-  updatedAt: 2022-09-11T06:38:57.899Z;
-  favorited: true;
-  favoritesCount: 0;
-  author: {
-    username: string;
-    bio: string;
-    image: string;
-    following: true;
-      }
-    }
-  ],
-  articlesCount: 0;
-}}
-   */
 
 /**
  * @param {{string}} tag

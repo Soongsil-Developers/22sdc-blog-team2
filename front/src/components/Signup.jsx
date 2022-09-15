@@ -2,12 +2,9 @@
 
 import { useRecoilState } from 'recoil';
 import { useState } from 'react';
-import { useEffect } from 'react';
-import { SignupState } from '../atoms/Signup';
 import { postUsers } from '../remotes';
 
 const Signup = () => {
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(SignupState);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -33,7 +30,6 @@ const Signup = () => {
 
                   postUsers({ username, email, password }).then((res) => {
                     if (res.data.user) {
-                      setIsLoggedIn(true);
                       localStorage.setItem('token', res.data.user.token);
                     }
                   });
