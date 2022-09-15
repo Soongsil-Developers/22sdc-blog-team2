@@ -4,13 +4,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ArticleFeed from './ArticleFeed';
 import { getArticleFeed } from '../remotes';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Home = () => {
+  const [articles, setArticles] = useState([]);
+
   useEffect(() => {
-    getArticleFeed((limit: 20), (offset: 0)).then((res) => {
-      const data = res.data.article;
-    });
+    getArticleFeed()
+      .then((res) => {
+        setArticles(res.data.article);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 
   return (
@@ -40,19 +46,9 @@ const Home = () => {
               </ul>
             </div>
 
-            {data.map(() => {
-              return (
-                <ArticleFeed
-                  author={data.author}
-                  createdAt={data.createdAt}
-                  description={data.description}
-                  favoritesCount={data.favoritesCount}
-                  slug={data.slug}
-                  title={data.title}
-                  updatedAt={data.updatedAt}
-                />
-              );
-            })}
+            {/* {articles.map((data) => (
+              <ArticleFeed data={data} />
+            ))} */}
           </div>
 
           <div className="col-md-3">

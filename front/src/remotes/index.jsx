@@ -114,22 +114,32 @@ const deleteProfile = (username) =>
   conduitAxios.delete(`/profiles/${username}/follow`);
 
 // ㅡㅡㅡㅡㅡ Articles ㅡㅡㅡㅡㅡ
+const getArticleFeed = () => conduitAxios.get(`/articles?limit=30&offset=0`);
 /**
- * @param {{number}} limit //default 값은 어떻게 처리할까
- * @param {{number}} offset
- * @returns {Promise<{ data: { article: Article  }}>}
- */
-//  * @returns {Promise<{ data: { article: Omit<Article, 'favoritesCount'>  }}>}
-const getArticleFeed = (limit, offset) =>
-  conduitAxios.get(`/articles/feed`, {
-    data: {
-      author: article.author,
-      createdAt: article.createdAt,
-      favoritesCount: article.favoritesCount,
-      title: article.title,
-      description: article.description,
-    },
-  });
+   @returns {{articles: [
+    {
+      slug: string;
+  title: string;
+  description: string;
+  body: string;
+  tagList: [
+    string
+  ];
+  createdAt: 2022-09-11T06:38:57.899Z;
+  updatedAt: 2022-09-11T06:38:57.899Z;
+  favorited: true;
+  favoritesCount: 0;
+  author: {
+    username: string;
+    bio: string;
+    image: string;
+    following: true;
+      }
+    }
+  ],
+  articlesCount: 0;
+}}
+   */
 
 /**
  * @param {{string}} tag
