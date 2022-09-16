@@ -1,20 +1,19 @@
 //@ts-check
 
-import { useRecoilState } from 'recoil';
 import { useState } from 'react';
-import { useEffect } from 'react';
-import { LoginState } from '../atoms/Login';
+import { useNavigate } from 'react-router-dom';
 import { postUsersLogin } from '../remotes';
 
 const Signin = () => {
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
+  // const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isLoggedIn) {
-    }
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //   }
+  // }, [isLoggedIn]);
 
   return (
     <div>
@@ -37,8 +36,11 @@ const Signin = () => {
 
                   postUsersLogin({ email, password }).then((res) => {
                     if (res.data.user) {
-                      setIsLoggedIn(true);
+                      // setIsLoggedIn(true);
                       localStorage.setItem('token', res.data.user.token);
+                      navigate('/');
+                    } else {
+                      alert('로그인 실패');
                     }
                   });
                 }}

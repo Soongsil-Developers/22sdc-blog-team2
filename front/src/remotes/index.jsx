@@ -1,7 +1,5 @@
 // @ts-check
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Signin from '../components/Signin';
 
 const conduitAxios = axios.create({
   baseURL: 'https://api.realworld.io/api',
@@ -53,7 +51,7 @@ const conduitAxios = axios.create({
  * @property {string} updatedAt
  * @property {boolean} favorited
  * @property {number} favoritesCount //articles에서 이 부분만 추가된거니 omit 사용하면 되려나
- * @property {Object} author
+ * @property {Profile} author
  * @property {string} username
  * @property {string} bio
  * @property {string} image
@@ -69,17 +67,17 @@ const conduitAxios = axios.create({
  * @param {{email: string; password: string;}} user
  * @returns {Promise<{ data: { user: User }}>}
  */
-const postUsersLogin = (user) =>
-  conduitAxios.post(`/users/login`, {
-    data: { email: user.email, password: user.password },
-  });
+const postUsersLogin = (user) => conduitAxios.post(`/users/login`, { user });
 
 /**
  * @param {{username: string; email: string; password: string;}} user
  * @returns {Promise<{ data: { user: User }}>}
  */
-const postUsers = (user) => conduitAxios.post(`/users`);
-
+const postUsers = (user) =>
+  conduitAxios.post(
+    `/users`,
+    { user }, //더 받아오기
+  );
 /**
  * @returns {Promise<{ data: { user: User }}>}
  */
@@ -93,7 +91,7 @@ const putUser = (user) => conduitAxios.put(`/user`);
 
 // ㅡㅡㅡㅡㅡ Profile ㅡㅡㅡㅡㅡ
 /**
- * @param {{string}} username
+ * @param {string} username
  * @returns {Promise<{ data: { profile: Profile }}>}
  */
 const getProfile = (username) => conduitAxios.get(`/profiles/${username}`);
@@ -114,18 +112,17 @@ const deleteProfile = (username) =>
 
 // ㅡㅡㅡㅡㅡ Articles ㅡㅡㅡㅡㅡ
 /**
- * @param {{number}} limit //default 값은 어떻게 처리할까
- * @param {{number}} offset
- * @returns {Promise<{ data: { article: Omit<Article, 'favoritesCount'>  }}>}
+ *
+ * @returns {Promise<{ data: { articles: Article, articlesCount: number } }>}
  */
-const getArticleFeed = (limit, offset) => conduitAxios.get(`/articles/feed`);
+const getArticleFeed = () => conduitAxios.get(`/articles?limit=30&offset=0`);
 
 /**
- * @param {{string}} tag
- * @param {{string}} author
- * @param {{string}} favorited
- * @param {{number}} limit
- * @param {{number}} offset
+ * @param {string} tag
+ * @param {string} author
+ * @param {string} favorited
+ * @param {number} limit
+ * @param {number} offset
  * @returns {Promise<{ data: { article: Omit<Article, 'favoritesCount'>  }}>}
  */
 const getArticles = (tag, author, favorited, limit, offset) =>
@@ -208,6 +205,7 @@ export {
   postProfile,
   deleteProfile,
   getArticleFeed,
+  getArticles,
   postArticles,
   getArticlesSlug,
   putArticlesSlug,
